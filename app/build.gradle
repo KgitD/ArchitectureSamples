@@ -1,41 +1,93 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
+    id 'kotlin-kapt'
 }
+
+kapt {
+    arguments {
+        arg("AROUTER_MODULE_NAME", project.getName())
+    }
+}
+
+def cfg = rootProject.ext.configuration
+def url = rootProject.ext.url
 
 android {
     compileSdkVersion 30
 
     defaultConfig {
         applicationId "com.ch999.android"
-        minSdkVersion 21
-        targetSdkVersion 30
+        minSdkVersion cfg.minSdkVersion
+        targetSdkVersion cfg.targetSdkVersion
         versionCode 1
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        multiDexEnabled true
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [AROUTER_MODULE_NAME: project.getName()]
+            }
+        }
     }
 
     buildTypes {
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
     kotlinOptions {
         jvmTarget = '1.8'
         useIR = true
     }
+
     buildFeatures {
         compose true
     }
+
     composeOptions {
         kotlinCompilerExtensionVersion compose_version
-        kotlinCompilerVersion '1.4.30'
+        kotlinCompilerVersion kotlin_compiler_version
+    }
+
+    flavorDimensions "company"
+    productFlavors {
+        jiuJi {
+            dimension "company"
+            applicationId "com.ch999.android.jiuji"
+            versionCode url.jiuJiConfigs.versionCode
+            versionName url.jiuJiConfigs.versionName
+            minSdkVersion cfg.minSdkVersion
+
+            resValue "string", "app_name", "九机"
+            resValue "color", 'loading_bg', '#239DFC'
+            resValue "string", "bugly_app_chanel", "ch999oa"
+        }
+        jiuXun {
+            dimension "company"
+            applicationId "com.ch999.android.jiuxun"
+            versionCode url.jiuJiConfigs.versionCode
+            versionName url.jiuJiConfigs.versionName
+            minSdkVersion cfg.minSdkVersion
+
+            resValue "string", "app_name", "九讯云"
+            resValue "color", 'loading_bg', '#239DFC'
+            resValue "string", "bugly_app_chanel", "ch999oa"
+        }
     }
 }
 
@@ -45,22 +97,23 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
     androidTestImplementation "androidx.compose.ui:ui-test-junit4:$compose_version"
 
-    implementation 'androidx.core:core-ktx:1.3.2'
-    implementation 'androidx.appcompat:appcompat:1.2.0'
-    implementation 'com.google.android.material:material:1.2.1'
-    implementation "androidx.compose.ui:ui:$compose_version"
-    implementation "androidx.compose.material:material:$compose_version"
-    implementation "androidx.compose.ui:ui-tooling:$compose_version"
-    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.3.0'
-    implementation 'androidx.activity:activity-compose:1.3.0-alpha04'
+    api "com.alibaba:arouter-api:$arouter_version"
+    annotationProcessor "com.alibaba:arouter-compiler:$arouter_version"
+    kapt "com.alibaba:arouter-compiler:$arouter_version"
 
-    implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
-    implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
-    implementation "com.squareup.retrofit2:converter-scalars:$retrofit_version"
+    implementation project(':common')
+    implementation project(":paging3")
+}
 
-    implementation "androidx.paging:paging-runtime-ktx:$paging_version" // For Kotlin use paging-runtime-ktx
-    // alternatively - without Android dependencies for testing
-    testImplementation "androidx.paging:paging-common-ktx:$paging_version" // For Kotlin use paging-common-ktx
-    // optional - RxJava support
-    implementation "androidx.paging:paging-rxjava2-ktx:$paging_version" // For Kotlin use paging-rxjava2-ktx
+tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).configureEach {
+    kotlinOptions {
+        // Treat all Kotlin warnings as errors
+        allWarningsAsErrors = true
+        freeCompilerArgs += '-Xopt-in=kotlin.RequiresOptIn'
+        // Enable experimental coroutines APIs, including Flow
+        freeCompilerArgs += '-Xopt-in=kotlin.Experimental'
+
+        // Set JVM target to 1.8
+        jvmTarget = "1.8"
+    }
 }

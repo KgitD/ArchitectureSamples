@@ -1,0 +1,126 @@
+plugins {
+    id 'com.android.library'
+    id 'kotlin-android'
+    id 'kotlin-kapt'
+}
+
+kapt {
+    arguments {
+        arg("AROUTER_MODULE_NAME", project.getName())
+    }
+}
+
+def cfg = rootProject.ext.configuration
+def url = rootProject.ext.url
+
+android {
+    compileSdkVersion 30
+
+    defaultConfig {
+        minSdkVersion cfg.minSdkVersion
+        targetSdkVersion cfg.targetSdkVersion
+        versionCode cfg.versionCode
+        versionName cfg.versionName
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        multiDexEnabled true
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [AROUTER_MODULE_NAME: project.getName()]
+            }
+        }
+    }
+
+    buildTypes {
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = '1.8'
+        useIR = true
+    }
+
+    buildFeatures {
+        compose true
+    }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion compose_version
+        kotlinCompilerVersion kotlin_compiler_version
+    }
+
+    flavorDimensions "company"
+    productFlavors {
+        jiuJi {
+            dimension "company"
+            versionCode url.jiuJiConfigs.versionCode
+            versionName url.jiuJiConfigs.versionName
+            minSdkVersion cfg.minSdkVersion
+
+            resValue "string", "app_name", "九机DEMO"
+            resValue "color", 'loading_bg', '#239DFC'
+            resValue "string", "bugly_app_chanel", "ch999oa"
+
+            buildConfigField "String", "BASE_URL_GITHUB", "\"${url.jiuJiConfigs.baseUrlGithub}\""
+        }
+        jiuXun {
+            dimension "company"
+            versionCode url.jiuJiConfigs.versionCode
+            versionName url.jiuJiConfigs.versionName
+            minSdkVersion cfg.minSdkVersion
+
+            resValue "string", "app_name", "九讯云DEMO"
+            resValue "color", 'loading_bg', '#239DFC'
+            resValue "string", "bugly_app_chanel", "ch999oa"
+
+            buildConfigField "String", "BASE_URL_GITHUB", "\"${url.jiuXunConfigs.baseUrlGithub}\""
+        }
+    }
+}
+
+dependencies {
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+    androidTestImplementation "androidx.compose.ui:ui-test-junit4:$compose_version"
+
+    api 'androidx.core:core-ktx:1.3.2'
+    api 'androidx.appcompat:appcompat:1.2.0'
+    api 'com.google.android.material:material:1.2.1'
+    api "androidx.compose.ui:ui:$compose_version"
+    api "androidx.compose.material:material:$compose_version"
+    api "androidx.compose.ui:ui-tooling:$compose_version"
+    api 'androidx.lifecycle:lifecycle-runtime-ktx:2.3.0'
+    api 'androidx.activity:activity-compose:1.3.0-alpha04'
+    api "androidx.navigation:navigation-compose:1.0.0-alpha08"
+    api 'androidx.constraintlayout:constraintlayout-compose:1.0.0-alpha03'
+
+    api "com.squareup.retrofit2:retrofit:$retrofit_version"
+    api "com.squareup.retrofit2:converter-gson:$retrofit_version"
+    api "com.squareup.retrofit2:converter-scalars:$retrofit_version"
+
+    api "androidx.paging:paging-runtime:$paging_version"
+    // alternatively - without Android dependencies for tests
+    api "androidx.paging:paging-common-ktx:$paging_version"
+    // Jetpack Compose Integration
+    // Jetpack Compose Integration
+    api "androidx.paging:paging-compose:1.0.0-alpha08"
+
+    api "com.alibaba:arouter-api:$arouter_version"
+    annotationProcessor "com.alibaba:arouter-compiler:$arouter_version"
+    kapt "com.alibaba:arouter-compiler:$arouter_version"
+}

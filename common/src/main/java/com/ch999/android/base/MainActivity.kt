@@ -1,4 +1,4 @@
-package com.ch999.android
+package com.ch999.android.base
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -8,8 +8,10 @@ import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
-import com.ch999.android.ui.theme.ArchitectureSamplesTheme
+import com.alibaba.android.arouter.facade.annotation.Route
+import com.ch999.android.base.ui.theme.ArchitectureSamplesTheme
 
+@Route(path="/common/test")
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

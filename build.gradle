@@ -1,21 +1,52 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 buildscript {
     ext {
+        kotlin_compiler_version = '1.4.31'
         compose_version = '1.0.0-beta02'
-        paging_version = '2.1.2'
+        paging_version = '3.0.0-beta02'
         retrofit_version = '2.9.0'
+        arouter_version = '1.5.1'
+        arouter_register_version = '1.0.2'
     }
     repositories {
         google()
         mavenCentral()
     }
     dependencies {
-        classpath "com.android.tools.build:gradle:7.0.0-alpha10"
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.4.30"
+        classpath 'com.android.tools.build:gradle:7.0.0-alpha12'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_compiler_version"
+        classpath "com.alibaba:arouter-register:$arouter_register_version"
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
+}
+
+ext {
+    configuration = [
+            buildToolsVersion: "30.0.0",
+            compileSdkVersion: 30,
+            minSdkVersion    : 21,
+            targetSdkVersion : 30,
+            versionCode      : 1,
+            versionName      : '1.0.0',
+            enableProguard   : false
+    ]
+
+    url = [
+            jiuJiConfigs : [
+                    versionCode  : 1,
+                    versionName  : "1.0.0",
+
+                    baseUrlGithub: "https://api.github.com/"
+            ],
+            jiuXunConfigs: [
+                    versionCode  : 1,
+                    versionName  : "1.0.0",
+
+                    baseUrlGithub: "https://api.github.com/"
+            ]
+    ]
 }
 
 task clean(type: Delete) {
