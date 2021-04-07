@@ -7,6 +7,9 @@ buildscript {
         retrofit_version = '2.9.0'
         arouter_version = '1.5.1'
         arouter_register_version = '1.0.2'
+        accompanist_version = "0.6.2"
+        lifecycle_version = "2.3.0"
+        arch_version = "2.1.0"
     }
     repositories {
         google()
