@@ -16,8 +16,8 @@ class MainViewModel : ViewModel() {
         var items = mRouterTableItems.value
         if (items.isNullOrEmpty()) {
             items = ArrayList()
-            items.add(RouterTableItem("https://api.github.com/paging3/github_search", "Github仓库"))
-            items.add(RouterTableItem("/paging3/github_search", "Github仓库"))
+            items.add(RouterTableItem("https://api.github.com/paging3/github_search", "Paging3"))
+            items.add(RouterTableItem("/training/pages", "ViewPager"))
             mRouterTableItems.value = items
         }
         return mRouterTableItems

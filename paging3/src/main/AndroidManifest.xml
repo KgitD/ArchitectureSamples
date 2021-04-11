@@ -9,7 +9,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ArchitectureSamples">
         <activity
-            android:name=".ui.GithubSearchActivity"
+            android:name=".ui.activity.GithubSearchActivity"
             android:exported="true"
             android:theme="@style/Theme.ArchitectureSamples.NoActionBar"/>
     </application>

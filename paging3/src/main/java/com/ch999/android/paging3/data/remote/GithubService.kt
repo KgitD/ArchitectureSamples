@@ -1,6 +1,6 @@
 package com.ch999.android.paging3.data.remote
 
-import com.ch999.android.paging3.BuildConfig
+import com.ch999.android.base.BuildConfig
 import com.ch999.android.paging3.model.GithubSearchPaging
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory

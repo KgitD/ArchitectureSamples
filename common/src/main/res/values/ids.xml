@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="container" type="id" />
+
+    <item name="app_bar" type="id"/>
+    <item name="collapsing_top_bar" type="id"/>
+    <item name="toolbar" type="id"/>
+
+    <item name="tab_layout" type="id" />
+    <item name="view_pager" type="id" />
+    <item name="recycler_view" type="id" />
+    <item name="scroll_view" type="id" />
+
+    <item name="title" type="id" />
+    <item name="subtitle" type="id" />
+    <item name="content" type="id" />
+    <item name="summary" type="id" />
+    <item name="description" type="id" />
+</resources>

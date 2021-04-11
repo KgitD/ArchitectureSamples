@@ -1,5 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Android/Projects/ArchitectureSamples/common/src/main/res/drawable/dividere_item_decoration_default.xml" value="0.33489583333333334" />
+        <entry key="..\:/Android/Projects/ArchitectureSamples/training/src/main/res/layout/activity_novel_details.xml" value="0.3145833333333333" />
+        <entry key="..\:/Android/Projects/ArchitectureSamples/training/src/main/res/layout/activity_pager_list.xml" value="0.3145833333333333" />
+        <entry key="..\:/Android/Projects/ArchitectureSamples/training/src/main/res/layout/activity_pages.xml" value="0.3145833333333333" />
+        <entry key="..\:/Android/Projects/ArchitectureSamples/training/src/main/res/layout/fragment_color.xml" value="0.3145833333333333" />
+        <entry key="..\:/Android/Projects/ArchitectureSamples/training/src/main/res/layout/fragment_pager.xml" value="0.25" />
+        <entry key="..\:/Android/Projects/ArchitectureSamples/training/src/main/res/layout/item_novel_details.xml" value="0.3145833333333333" />
+        <entry key="..\:/Android/Projects/ArchitectureSamples/training/src/main/res/layout/item_novel_overview.xml" value="0.2477355072463768" />
+        <entry key="..\:/Android/Projects/ArchitectureSamples/training/src/main/res/layout/item_pager.xml" value="0.3145833333333333" />
+        <entry key="..\:/Android/Projects/ArchitectureSamples/training/src/main/res/layout/layout/item_article.xml" value="0.3145833333333333" />
+        <entry key="..\:/Android/Projects/ArchitectureSamples/training/src/main/res/layout/layout/item_novel_overview.xml" value="0.33" />
+      </map>
+    </option>
+  </component>
   <component name="ExternalStorageConfigurationManager" enabled="true" />
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="JDK" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="@layout/fragment_pager">
+
+    <com.qmuiteam.qmui.layout.QMUIConstraintLayout
+        android:id="@id/container"
+        style="?attr/QMUICommonListItemViewStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/default_card_view_padding">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@id/title"
+            style="@style/UITextAppearance.Title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:duplicateParentState="true"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="红楼梦" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@id/subtitle"
+            style="@style/UITextAppearance.Subtitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:duplicateParentState="true"
+            app:layout_constraintBottom_toTopOf="@id/content"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/title"
+            tools:text="清代长篇人情小说" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@id/content"
+            style="@style/UITextAppearance.Content"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:duplicateParentState="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/subtitle"
+            tools:text="《红楼梦》，中国古代章回体长篇小说，中国古典四大名著之一，一般认为是清代作家曹雪芹所著。小说以贾、史、王、薛四大家族的兴衰为背景，以富贵公子贾宝玉为视角，以贾宝玉与林黛玉、薛宝钗的爱情婚姻悲剧为主线，描绘了一批举止见识出于须眉之上的闺阁佳人的人生百态，展现了真正的人性美和悲剧美，可以说是一部从各个角度展现女性美以及中国古代社会世态百相的史诗性著作。" />
+
+    </com.qmuiteam.qmui.layout.QMUIConstraintLayout>
+</layout>

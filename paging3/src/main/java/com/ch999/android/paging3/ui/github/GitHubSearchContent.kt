@@ -31,8 +31,8 @@ import com.ch999.android.paging3.ui.common.FullScreenLoading
 import com.ch999.android.paging3.ui.common.LoadingContent
 import com.ch999.android.paging3.ui.style.contentTextStyle
 import com.ch999.android.paging3.ui.style.titleTextStyle
-import com.ch999.android.paging3.ui.theme.GitHubTopAppBarColor
 import com.ch999.android.paging3.vm.GithubSearchViewModel
+import dev.chrisbanes.accompanist.insets.statusBarsPadding
 import java.net.SocketTimeoutException
 
 private val defaultSpacerSize = 16.dp
@@ -41,21 +41,27 @@ private val defaultSpacerSize = 16.dp
 fun GitHubSearchScreen(vm: GithubSearchViewModel, onBack: () -> Unit) {
     val lazyPagingItems = vm.searchRepositories().collectAsLazyPagingItems()
     Scaffold(topBar = {
-        TopAppBar(backgroundColor = GitHubTopAppBarColor, content = {
-            IconButton(onClick = onBack) {
-                Icon(
-                    imageVector = Icons.Filled.ArrowBack,
-                    contentDescription = stringResource(R.string.cd_navigate_up),
-                    tint = Color.White
+        TopAppBar(
+            // https://google.github.io/accompanist/insets/
+            modifier = Modifier.statusBarsPadding(),
+            backgroundColor = Color(0xFFADD9C9),
+            contentColor = Color.White,
+            elevation = 3.dp,
+            content = {
+                IconButton(onClick = onBack) {
+                    Icon(
+                        imageVector = Icons.Filled.ArrowBack,
+                        contentDescription = stringResource(R.string.cd_navigate_up),
+                        tint = Color.White
+                    )
+                }
+                Text(
+                    modifier = Modifier.wrapContentWidth(),
+                    text = "Github Repositories",
+                    style = MaterialTheme.typography.subtitle2,
+                    color = Color.White // LocalContentColor.current
                 )
-            }
-            Text(
-                modifier = Modifier.wrapContentWidth(),
-                text = "Github Repositories",
-                style = MaterialTheme.typography.subtitle2,
-                color = Color.White // LocalContentColor.current
-            )
-        })
+            })
     }, content = {
         LoadingContent(
             empty = lazyPagingItems.itemCount == 0,

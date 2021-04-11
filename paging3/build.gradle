@@ -10,9 +10,6 @@ kapt {
     }
 }
 
-def cfg = rootProject.ext.configuration
-def url = rootProject.ext.url
-
 android {
     compileSdkVersion 30
 
@@ -59,34 +56,6 @@ android {
     composeOptions {
         kotlinCompilerExtensionVersion compose_version
         kotlinCompilerVersion kotlin_compiler_version
-    }
-
-    flavorDimensions "company"
-    productFlavors {
-        jiuJi {
-            dimension "company"
-            versionCode url.jiuJiConfigs.versionCode
-            versionName url.jiuJiConfigs.versionName
-            minSdkVersion cfg.minSdkVersion
-
-            resValue "string", "app_name", "九机"
-            resValue "color", 'loading_bg', '#239DFC'
-            resValue "string", "bugly_app_chanel", "ch999oa"
-
-            buildConfigField "String", "BASE_URL_GITHUB", "\"${url.jiuJiConfigs.baseUrlGithub}\""
-        }
-        jiuXun {
-            dimension "company"
-            versionCode url.jiuJiConfigs.versionCode
-            versionName url.jiuJiConfigs.versionName
-            minSdkVersion cfg.minSdkVersion
-
-            resValue "string", "app_name", "九讯云"
-            resValue "color", 'loading_bg', '#239DFC'
-            resValue "string", "bugly_app_chanel", "ch999oa"
-
-            buildConfigField "String", "BASE_URL_GITHUB", "\"${url.jiuXunConfigs.baseUrlGithub}\""
-        }
     }
 }
 

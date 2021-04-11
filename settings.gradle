@@ -10,3 +10,4 @@ rootProject.name = "ArchitectureSamples"
 include ':app'
 include ':common'
 include ':paging3'
+include ':training'

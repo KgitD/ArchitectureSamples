@@ -19,22 +19,24 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import com.alibaba.android.arouter.launcher.ARouter
-import com.ch999.android.R
 import com.ch999.android.base.ui.theme.White245
 import com.ch999.android.model.RouterTableItem
 import com.ch999.android.model.SettingItem
 import com.ch999.android.model.UserInfo
 import com.ch999.android.paging3.ui.style.contentTextStyle
 import com.ch999.android.paging3.ui.style.titleTextStyle
+import com.ch999.android.ui.theme.TealGreen
 import com.ch999.android.vm.MainViewModel
 import dev.chrisbanes.accompanist.coil.CoilImage
 import dev.chrisbanes.accompanist.glide.GlideImage
+import dev.chrisbanes.accompanist.insets.navigationBarsPadding
+import dev.chrisbanes.accompanist.insets.statusBarsPadding
+import dev.chrisbanes.accompanist.insets.systemBarsPadding
 import kotlinx.coroutines.launch
 
 @ExperimentalFoundationApi
@@ -51,7 +53,8 @@ private fun RouterTablesScreen(tableItems: List<RouterTableItem>) {
         modifier = Modifier
             .fillMaxWidth()
             .fillMaxHeight()
-            .background(White245)
+            .background(White245),
+        reverseLayout = false
     ) {
         items(tableItems, itemContent = { RouterTableContent(item = it) })
     }
@@ -74,14 +77,14 @@ private fun RouterTableContent(item: RouterTableItem?) {
     ) {
         val (path, description) = createRefs()
         Text(
-            text = item?.path ?: "",
+            text = item?.description ?: "",
             modifier = Modifier.constrainAs(path) {
                 linkTo(start = parent.start, end = parent.end)
                 linkTo(top = parent.top, bottom = description.top)
             }, style = titleTextStyle(), textAlign = TextAlign.Start, maxLines = 2, overflow = TextOverflow.Ellipsis
         )
         Text(
-            text = item?.description ?: "",
+            text = item?.path ?: "",
             modifier = Modifier.constrainAs(description) {
                 linkTo(start = parent.start, end = parent.end)
                 linkTo(top = path.bottom, bottom = parent.bottom)
@@ -93,6 +96,7 @@ private fun RouterTableContent(item: RouterTableItem?) {
 @ExperimentalFoundationApi
 @Composable
 fun HomeScreen(vm: MainViewModel) {
+    // val insets = LocalWindowInsets.current
     val coroutineScope = rememberCoroutineScope()
     val scaffoldState = rememberScaffoldState()
     val userInfoState: State<UserInfo?> = vm.currentAccount().observeAsState()
@@ -105,6 +109,11 @@ fun HomeScreen(vm: MainViewModel) {
     }, topBar = {
         val toolbarTitle = "Compose Training"
         TopAppBar(
+            // https://google.github.io/accompanist/insets/
+            modifier = Modifier.statusBarsPadding(),
+            backgroundColor = TealGreen,
+            contentColor = Color.White,
+            elevation = 3.dp,
             title = { Text(text = toolbarTitle) },
             navigationIcon = {
                 IconButton(
@@ -117,10 +126,6 @@ fun HomeScreen(vm: MainViewModel) {
                             contentDescription = null,
                             contentScale = ContentScale.FillHeight,
                             loading = {
-                                Icon(
-                                    painter = painterResource(id = R.mipmap.ic_launcher),
-                                    contentDescription = null
-                                )
                             },
                             modifier = Modifier
                                 .size(36.dp)
@@ -139,6 +144,8 @@ fun HomeScreen(vm: MainViewModel) {
 fun HomeDrawer(userInfoState: State<UserInfo?>, settingItemsState: State<MutableList<SettingItem>?>) {
     LazyColumn(
         modifier = Modifier
+            .navigationBarsPadding(false)
+            .systemBarsPadding(false)
             .fillMaxSize()
             .background(color = White245),
         verticalArrangement = Arrangement.spacedBy(16.dp)
@@ -168,7 +175,8 @@ fun HomeDrawerHeaderContent(userInfoState: State<UserInfo?>) {
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(240.dp)
-                    .clip(MaterialTheme.shapes.large).clickable {  }
+                    .clip(MaterialTheme.shapes.large)
+                    .clickable { }
             )
         }
     }

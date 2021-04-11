@@ -11,7 +11,6 @@ kapt {
 }
 
 def cfg = rootProject.ext.configuration
-def url = rootProject.ext.url
 
 android {
     compileSdkVersion 30
@@ -57,37 +56,12 @@ android {
 
     buildFeatures {
         compose true
+        dataBinding = true
     }
 
     composeOptions {
         kotlinCompilerExtensionVersion compose_version
         kotlinCompilerVersion kotlin_compiler_version
-    }
-
-    flavorDimensions "company"
-    productFlavors {
-        jiuJi {
-            dimension "company"
-            applicationId "com.ch999.android.jiuji"
-            versionCode url.jiuJiConfigs.versionCode
-            versionName url.jiuJiConfigs.versionName
-            minSdkVersion cfg.minSdkVersion
-
-            resValue "string", "app_name", "九机"
-            resValue "color", 'loading_bg', '#239DFC'
-            resValue "string", "bugly_app_chanel", "ch999oa"
-        }
-        jiuXun {
-            dimension "company"
-            applicationId "com.ch999.android.jiuxun"
-            versionCode url.jiuJiConfigs.versionCode
-            versionName url.jiuJiConfigs.versionName
-            minSdkVersion cfg.minSdkVersion
-
-            resValue "string", "app_name", "九讯云"
-            resValue "color", 'loading_bg', '#239DFC'
-            resValue "string", "bugly_app_chanel", "ch999oa"
-        }
     }
 }
 
@@ -103,6 +77,7 @@ dependencies {
 
     implementation project(':common')
     implementation project(":paging3")
+    implementation project(":training")
 }
 
 tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).configureEach {
